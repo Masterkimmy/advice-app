@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title> Advice generator</title>
+
+  <style>
+    .sec,body{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: black;
+      height: 100vh;
+      width: 100%;
+    }
+    .one{
+      color:   hsl(150, 100%, 66%) ; 
+     }
+    .top{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: rgb(44, 44, 46) ;
+      height: 30vh;
+      border-radius: 9px;
+      /* gap: 20px; */
+    }
+    button{
+      border: none;
+      background-color:  hsl(150, 100%, 66%);
+      border-radius: 7px;
+      height: 4vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      top: 25%;
+    }
+    .key{
+      color: white;
+      text-align: center;
+    }
+    .one{
+      height: 2vh;
+    }
+  @media screen and (max-width:950px){
+    .button_{
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+    .top{
+      width: 85%;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon{
+      width:70vw;
+    }
+
+
+  
+  }
+
+  </style>
+</head>
+<body onload="page()" >
+  <section class="sec">
+    <div class="top">
+      <h2 class="one">Adivce # <span class="many"></span></h2>
+      <p class="key"></p>
+        <img class="icon" src="./images/pattern-divider-desktop.svg" alt="">
+        <button onclick="page()">
+          <img class="one" src="./images/icon-dice.svg" alt="">
+      </button>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    async function page(){
+      const baseurl = "https://api.adviceslip.com/advice"
+      const response = await axios.get(baseurl)
+      const data = response.data;
+      const id = data.slip.id
+      const change = data.slip.advice
+      document.querySelector(".many").textContent = id
+      document.querySelector(".key").textContent = `" ${change} " `
+    }
+  </script>
+</body>
+</html>
